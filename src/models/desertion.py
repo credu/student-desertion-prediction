@@ -24,7 +24,7 @@ columns = [
 @st.cache_resource
 def __unpack_model_data() -> tuple[RandomForestClassifier, any, any]:
     try:
-        with open('src/models/desertion.pkl', 'rb') as f:
+        with open("src/models/desertion.pkl", "rb") as f:
             return pickle.load(f)
     except Exception:
         print("Error: Error not handled")

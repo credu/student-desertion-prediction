@@ -49,4 +49,4 @@ probabilidades = model.predict_proba(data)[0]
 st.subheader("Resultados")
 st.text(f"Probabilidad de Permanencia: {probabilidades[0]:.2%}")
 st.text(f"Probabilidad de Deserción: {probabilidades[1]:.2%}")
-st.text(f"¿Deserción?: {'SÍ' if prediccion == 1 else 'NO'}")
+st.text(f"¿Deserción?: {"SÍ" if prediccion == 1 else "NO"}")

@@ -8,20 +8,20 @@ MODEL_PATH = "src/models/desertion.pkl"
 
 def get_data():
     df = pd.read_csv("./src/data/REPORTE_RECORD_ESTUDIANTIL_ANONIMIZADO.csv")
-    df['PROMEDIO'] = df['PROMEDIO'].str.replace(',', '.').astype(float)
+    df["PROMEDIO"] = df["PROMEDIO"].str.replace(",", ".").astype(float)
     return df
 
 
 def get_students_data(df: pd.DataFrame):
-    mask = df["PERIODO"].str.startswith('2025 -')
+    mask = df["PERIODO"].str.startswith("2025 -")
     active_students_id = df[mask]["ESTUDIANTE"].unique()
-    df_features = df[~df['PERIODO'].str.contains('ING')]
-    student_data = df_features.groupby('ESTUDIANTE').agg({
-        'PROMEDIO': 'mean',
-        'ASISTENCIA': 'mean',
-        'NO. VEZ': 'max',
-        'NIVEL': 'max',
-        'ESTADO': [lambda x: (x == 'REPROBADA').sum(), 'count']
+    df_features = df[~df["PERIODO"].str.contains("ING")]
+    student_data = df_features.groupby("ESTUDIANTE").agg({
+        "PROMEDIO": "mean",
+        "ASISTENCIA": "mean",
+        "NO. VEZ": "max",
+        "NIVEL": "max",
+        "ESTADO": [lambda x: (x == "REPROBADA").sum(), "count"]
     })
 
     student_data.columns = [
@@ -33,10 +33,10 @@ def get_students_data(df: pd.DataFrame):
         "TOTAL_MATERIAS"
     ]
 
-    student_data['RATIO_REPROBADAS'] = \
-        student_data['MATERIAS_REPROBADAS'] / student_data['TOTAL_MATERIAS']
+    student_data["RATIO_REPROBADAS"] = \
+        student_data["MATERIAS_REPROBADAS"] / student_data["TOTAL_MATERIAS"]
 
-    student_data['DESERTO'] = student_data.index.map(
+    student_data["DESERTO"] = student_data.index.map(
         lambda x: 0 if x in active_students_id else 1
     )
     return student_data
@@ -53,7 +53,7 @@ def train_model(df: pd.DataFrame):
     ]
 
     X = df[features]
-    y = df['DESERTO']
+    y = df["DESERTO"]
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -69,7 +69,7 @@ def train_model(df: pd.DataFrame):
 
 def save_model(model):
     try:
-        with open(MODEL_PATH, 'wb') as f:
+        with open(MODEL_PATH, "wb") as f:
             pickle.dump(model, f)
     except Exception:
         print("Error: Error not handled")
