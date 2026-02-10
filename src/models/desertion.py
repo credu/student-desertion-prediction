@@ -1,5 +1,6 @@
 import pickle
 import streamlit as st
+import pandas as pd
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
@@ -46,3 +47,14 @@ def get_model_metrics():
     conf_matrix = confusion_matrix(y_test, y_pred)
 
     return accuracy, precision, recall, f1, conf_matrix
+
+
+def get_feature_importances():
+    model = get_model()
+    feature_importances = model.feature_importances_
+    df_importancia = pd.DataFrame({
+        "Feature": columns,
+        "Importancia": feature_importances
+    }).sort_values(by="Importancia", ascending=False)
+
+    return df_importancia
