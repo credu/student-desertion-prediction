@@ -13,10 +13,9 @@ average_assistance = st.slider(
     min_value=0,
     max_value=100
 )
-max_subject_times = st.number_input(
+max_subject_times = st.selectbox(
     label="Veces maximas que ha repetido una sola materia",
-    min_value=0,
-    max_value=3
+    options=[0, 1, 2, 3]
 )
 semester = st.number_input(
     label="Numero de Semestre",
