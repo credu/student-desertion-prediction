@@ -18,7 +18,8 @@ model_metrics = st.Page(
 prediction_risk = st.Page(
     "pages/prediction_risk.py",
     title="Predicción de riesgo de deserción",
-    icon="🧠"
+    icon="🧠",
+    url_path="prediccion"
 )
 
 pg = st.navigation([
