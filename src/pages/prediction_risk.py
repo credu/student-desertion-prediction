@@ -8,7 +8,7 @@ average_score = st.number_input(
     min_value=0.0,
     max_value=10.0
 )
-average_assistance = st.number_input(
+average_assistance = st.slider(
     label="Asistencia promedio (0-100)",
     min_value=0,
     max_value=100
@@ -16,6 +16,7 @@ average_assistance = st.number_input(
 max_subject_times = st.number_input(
     label="Veces maximas que ha repetido una sola materia",
     min_value=0,
+    max_value=3
 )
 semester = st.number_input(
     label="Numero de Semestre",
