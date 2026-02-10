@@ -27,14 +27,14 @@ def __unpack_model_data() -> tuple[RandomForestClassifier, any, any]:
         with open("src/models/desertion.pkl", "rb") as f:
             return pickle.load(f)
     except Exception:
-        print("Error: Error not handled")
+        return None
 
 
 def get_model() -> RandomForestClassifier:
     return __unpack_model_data()[0]
 
 
-@st.cache_resource
+@st.cache_data
 def get_model_metrics():
     model, X_test, y_test = __unpack_model_data()
 
@@ -49,6 +49,7 @@ def get_model_metrics():
     return accuracy, precision, recall, f1, conf_matrix
 
 
+@st.cache_data
 def get_feature_importances():
     model = get_model()
     feature_importances = model.feature_importances_
