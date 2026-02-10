@@ -18,6 +18,9 @@ c3.metric("Promedio General", f"{student_data["PROMEDIO"].mean():.2f}")
 with st.expander("Ver datos históricos"):
     st.dataframe(academic_record_df, use_container_width=True)
 
+with st.expander("Ver datos promedio de los estudiantes"):
+    st.dataframe(student_data, use_container_width=True)
+
 with st.expander("Variables más importantes", expanded=True):
     st.subheader("Variables más importantes para la predicción")
     st.write(
